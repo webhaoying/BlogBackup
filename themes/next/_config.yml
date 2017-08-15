@@ -14,7 +14,7 @@ keywords: "Hexo, NexT"
 rss:
 
 # Specify the date when the site was setup
-#since: 2015
+since: 2015
 
 # icon between year and author @Footer
 authoricon: heart
@@ -47,12 +47,12 @@ index_with_subtitle: false
 # When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash (/archives -> archives)
 menu:
   home: /
-  #categories: /categories/
+  categories: /categories/
   #about: /about/
   archives: /archives/
   tags: /tags/
   #sitemap: /sitemap.xml
-  #commonweal: /404/
+#  commonweal: /404/
 
 # Enable/Disable menu icons.
 # Icon Mapping:
@@ -92,7 +92,12 @@ scheme: Gemini
 # Value is the target link (E.g. GitHub: https://github.com/iissnan)
 social:
   GitHub: https://github.com/webhaoying
-  E-Mail: zlyheut@163.com
+  知乎: https://www.zhihu.com/people/zhang-hao-87-92
+  Csdn: http://my.csdn.net/pandakongfuhao
+  V2EX: https://www.v2ex.com/member/haoying
+#  StackOverflow: https://www.v2ex.com/member/haoying
+
+  #E-Mail: zlyheut@163.com
 
 # Social Links Icons
 # Icon Mapping:
@@ -250,7 +255,7 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: normal
+highlight_theme: night blue
 
 
 # ---------------------------------------------------------------
@@ -271,13 +276,13 @@ font:
   global:
     # external: true will load this font family from host.
     external: true
-    family: Lato
+    family: Monda
 
   # Font settings for Headlines (h1, h2, h3, h4, h5, h6)
   # Fallback to `global` font settings.
   headings:
     external: true
-    family:
+    family: Roboto Slab
 
   # Font settings for posts
   # Fallback to `global` font settings.
@@ -290,13 +295,13 @@ font:
   # The `size` option use `px` as unit
   logo:
     external: true
-    family:
-    size:
+    family: Lobster Two
+    size: 24
 
   # Font settings for <code> and code blocks.
   codes:
     external: true
-    family:
+    family: PT Mono
     size:
 
 
