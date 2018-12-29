@@ -1,22 +1,58 @@
 ---
 title: 使用git撤销更改
 date: 2018-12-26 12:38:57
-tags: js
+tags: 
+        - tools
+        - js 
+
+categories: 
+        - tools
+        - js
 ---
-今天是个里程碑，我表示很开心。
-Git checkout  - -  file 
-        注意：git checkout -b branchName    //.新建分支并且切换到该分支
-                    git checkout branchName.     // 切换到xxxx分支
-         git checkout — fileName. 是将我们最新的一些修改内容进行删除，
-删除的是：已经在本地更改，但是没有git add添加到暂存区的代码。
-        git reset HEAD - - fileName  将我们已经git add添加到暂存区的代码，回退到没有git add的状态，如果还想删除该部分内容，就需要git checkout - -  fileName
-      
+````
+    今天是个里程碑，我表示很开心。
+````
+* # 详细介绍git各种状态下的撤销更改
+    + ## 1、已经在本地更改，但是没有 git add 到本地暂存区的更改
+        ````
+            git checkout  --  <fileName> (注意：两个横杠)
+        ````
+        note(注意):
+        ````
+            git checkout -b branchName    //.新建分支并且切换到该分支
+            git checkout    branchName.     // 切换到xxxx分支
+            git checkout —- fileName. //将我们最新的一些修改内容进行删除(注意：两个横杠)
+        ````
+    + ## 2、已经在本地更改，并且已经 git add 到本地暂存区的更改，
+        - ### 首先将文件恢复到只在本地更改，但是没有提交到暂存区的状态，即上述1状态：
+        ````
+            git reset  --  <fileName> (注意：两个横杠)
+        ````
+        - ### 如果还想撤回对应文件的修改，然后进行上述情况1对应操作
 
-如果是已经git commit 到本地缓存的代码要进行版本回退的话：
-  git reset —hard commit_id（回退到任意一个hash代表的任意版本）
-或者是 git reset - - hard HEAD^(代表上一个版本)
-或者是 git reset — hard HEAD^^(代表会退到上上个版本)
-或者是 git reset - - hard HEAD~100(代表会退到上100个版本)
+    + ## 3、已经在本地更改，并且已经 git add 到本地暂存区，并且已经git commit 到本地工作区，则需要进行版本回退，
+        - ### 首先了解一下命令  git log 如(下图) ：
+        
+        ````
+            git log 
+        ````
+            ![avatar](/images/1226-log.jpeg)
+            上图中红框部分就是每一次git commit的历史记录id，并且这个id是唯一的，代表着过去的你的每一次提交,
+        - ### 然后将文件回退到指定的commit版本
+
+        ````
+            git reset  --hard  <commit_id> 
+            (注意：两个横杠, commit_id 即为上图中红框位置的字符串，并且可以省略天下，一般6位就能准确定位到具体的commit记录)
+        ````
+        - ### 另外还有如下的简单操作
+         ````
+            git reset -- hard HEAD^(回退上一个版本)
+            git reset —- hard HEAD^^(回退到上上个版本)
+            git reset -- hard HEAD~100(回退到上100个版本)
+        ````
+    + ## 4、如果是本地的代码出现严重错误，自己已经下定决心开始重新填坑改写代码，并且该部分代码还没有推到远程分支，最简单粗暴的方式就是将本地代码删除，直接clone下来远程的代码。
+        - ###  1、根据此情况，建议我们开发任何一个新功能的时候，都要在本地新建一个分支进行开发，因为没法保证在开发该功能期间是否会安排你去解决一些需要立即解决的问题，而这要求你必须要切分支。
+
+        - ###  2、所有的更改都在本地谨慎的验证之后再推送到远端分支，并且保证自己的代码不被远端的非master分支污染，这样保证自己开发的新功能的分支，时刻都是一个纯净的工作区域。这样，在有了需要立即解决的bug的时候，你再也不会因为代码分支问题而烦恼，你只需要切换到一个master的copy分支（一般公司都会有一个专供测试环境匹配的代码分支，而这个分支，理论上讲应该是时刻与master分支保持同步的）
 
 
-其中 git log 可以查看提交的历史，用来确定要会退到哪个版本

@@ -3,7 +3,7 @@
 # ---------------------------------------------------------------
 
 # Put your favicon.ico into `hexo-site/source/` directory.
-favicon: /favicon.ico
+favicon: /uploads/favicon.ico
 
 # Set default keywords (Use a comma to separate)
 keywords: "Hexo, NexT"
@@ -95,9 +95,9 @@ social:
   知乎: https://www.zhihu.com/people/zhang-hao-87-92
   Csdn: http://my.csdn.net/pandakongfuhao
   V2EX: https://www.v2ex.com/member/haoying
-#  StackOverflow: https://www.v2ex.com/member/haoying
-
-  #E-Mail: zlyheut@163.com
+  StackOverflow: https://stackoverflow.com/users/8594873/kfpanda
+  简书: https://www.jianshu.com/u/8f84110a2927
+# E-Mail: zlyheut@163.com
 
 # Social Links Icons
 # Icon Mapping:
@@ -132,7 +132,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-avatar: /uploads/head.jpeg
+avatar: /uploads/avator.jpg
 
 # Table Of Contents in the Sidebar
 toc:
@@ -676,5 +676,9 @@ css: css
 js: js
 images: images
 
+server:
+  port: 4001
+  compress: true
+  header: true
 # Theme version
 version: 5.1.2

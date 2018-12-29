@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: kfhao
+title: kfpanda
 subtitle: 多点阳光  少点套路
 description: Be a better man
-author: kfhao
+author: kfpanda
 language: zh-Hans
 timezone:
 
@@ -87,4 +87,8 @@ sitemap:
   path: sitemap.xml
 baidusitemap:
   path: baidusitemap.xml
+server:
+  port: 4001
+  compress: true
+  header: true
 
