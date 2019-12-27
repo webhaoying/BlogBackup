@@ -118,18 +118,18 @@
 
 
 
-<meta name="description" content="立个flag，新的一年开始了，我表示很开心。  深入理解原型与与原型链[参考1]https://www.cnblogs.com/dengpeng1004/p/5317245.html  [参考2]https://blog.csdn.net/baidu_31333625/article/details/54613438 [JS原型链与继承别再被问倒了]https://juejin.im/post/5">
+<meta name="description" content="立个flag，新的一年开始了，我表示很开心。 深入理解原型与与原型链[参考1]https://www.cnblogs.com/dengpeng1004/p/5317245.html [参考2]https://blog.csdn.net/baidu_31333625/article/details/54613438 [JS原型链与继承别再被问倒了]https://juejin.im/post/58f">
 <meta name="keywords" content="js,konwledge">
 <meta property="og:type" content="article">
-<meta property="og:title" content="原型与与原型链详解">
+<meta property="og:title" content="原型与与原型链详解及JS继承之源">
 <meta property="og:url" content="https://webhaoying.github.io/2019/02/18/原型与与原型链详解/index.html">
 <meta property="og:site_name" content="kfpanda">
-<meta property="og:description" content="立个flag，新的一年开始了，我表示很开心。  深入理解原型与与原型链[参考1]https://www.cnblogs.com/dengpeng1004/p/5317245.html  [参考2]https://blog.csdn.net/baidu_31333625/article/details/54613438 [JS原型链与继承别再被问倒了]https://juejin.im/post/5">
+<meta property="og:description" content="立个flag，新的一年开始了，我表示很开心。 深入理解原型与与原型链[参考1]https://www.cnblogs.com/dengpeng1004/p/5317245.html [参考2]https://blog.csdn.net/baidu_31333625/article/details/54613438 [JS原型链与继承别再被问倒了]https://juejin.im/post/58f">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-26T07:39:58.013Z">
+<meta property="og:updated_time" content="2019-12-27T03:33:37.592Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="原型与与原型链详解">
-<meta name="twitter:description" content="立个flag，新的一年开始了，我表示很开心。  深入理解原型与与原型链[参考1]https://www.cnblogs.com/dengpeng1004/p/5317245.html  [参考2]https://blog.csdn.net/baidu_31333625/article/details/54613438 [JS原型链与继承别再被问倒了]https://juejin.im/post/5">
+<meta name="twitter:title" content="原型与与原型链详解及JS继承之源">
+<meta name="twitter:description" content="立个flag，新的一年开始了，我表示很开心。 深入理解原型与与原型链[参考1]https://www.cnblogs.com/dengpeng1004/p/5317245.html [参考2]https://blog.csdn.net/baidu_31333625/article/details/54613438 [JS原型链与继承别再被问倒了]https://juejin.im/post/58f">
 
 
 
@@ -164,7 +164,7 @@
 
 
 
-  <title>原型与与原型链详解 | kfpanda</title>
+  <title>原型与与原型链详解及JS继承之源 | kfpanda</title>
   
 
 
@@ -308,7 +308,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">原型与与原型链详解</h1>
+          <h1 class="post-title" itemprop="name headline">原型与与原型链详解及JS继承之源</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-26T15:39:58+08:00">
-                2019-12-26
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-27T11:33:37+08:00">
+                2019-12-27
               </time>
             
           </span>
@@ -404,9 +404,7 @@
 
       
         <pre><code>立个flag，新的一年开始了，我表示很开心。
-</code></pre><ul>
-<li><h1 id="深入理解原型与与原型链"><a href="#深入理解原型与与原型链" class="headerlink" title="深入理解原型与与原型链"></a>深入理解原型与与原型链</h1>[参考1]<a href="https://www.cnblogs.com/dengpeng1004/p/5317245.html" target="_blank" rel="noopener">https://www.cnblogs.com/dengpeng1004/p/5317245.html</a></li>
-</ul>
+</code></pre><h1 id="深入理解原型与与原型链"><a href="#深入理解原型与与原型链" class="headerlink" title="深入理解原型与与原型链"></a>深入理解原型与与原型链</h1><p>[参考1]<a href="https://www.cnblogs.com/dengpeng1004/p/5317245.html" target="_blank" rel="noopener">https://www.cnblogs.com/dengpeng1004/p/5317245.html</a></p>
 <p>[参考2]<a href="https://blog.csdn.net/baidu_31333625/article/details/54613438" target="_blank" rel="noopener">https://blog.csdn.net/baidu_31333625/article/details/54613438</a></p>
 <p>[JS原型链与继承别再被问倒了]<a href="https://juejin.im/post/58f94c9bb123db411953691b" target="_blank" rel="noopener">https://juejin.im/post/58f94c9bb123db411953691b</a> (主要)</p>
 <p>[从prototype与<strong>proto</strong>窥探JS继承之源]<a href="https://juejin.im/post/58f9d0290ce46300611ada65(主要)" target="_blank" rel="noopener">https://juejin.im/post/58f9d0290ce46300611ada65(主要)</a><br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaScript是一门完全面向对象的语言，如果想要更好地使用JavaScript的面向对象系统，原型和原型链就是个绕不开的话题。</span><br></pre></td></tr></table></figure></p>
@@ -416,6 +414,42 @@
 </code></pre><p> 回到我们本节讨论的话题: 原型对象指向另一个构造函数的实例,即：当constructor1.prototype = instance2<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">讨论的前提条件： 现有构造函数constructor1，并且由该函数构造出来的实例对象instance1，同理也有constcutor2以及由其构造出来的instance2. 并且constructor1.prototype = instance2</span><br><span class="line">如果试图引用constructor1构造的实例instance1的某个属性或方法，则会由如下场景：</span><br><span class="line"><span class="number">1</span>、首先在实例对象instance1内部属性或者方法中查找一遍，找到则停止执行以下步骤</span><br><span class="line"><span class="number">2</span>、如果<span class="number">1</span>找不到，接着会在实例对象的原型链中寻找，即前往实例对象的构造函数的原型对象中寻找，即：会在instance1.__proto__(constructor1.prototype)中找一遍，此时发现，constructor1.prototype实际上就是instance2，也就是在instance2中查找，这样从一个实例中查找，跳到了另一个实例中查找，两个实例间就建立起了原型链的关系(实际上是通过对象内部有且必有的__proto__属性)。如果找到则停止执行以下步骤</span><br><span class="line"><span class="number">3</span>、如果instance2中仍旧没有找到，程序会继续在instance2.__proto__(constructor2.prototype)寻找，以次类推，如果还没有找到，还会继续沿着存在诸如constructor2.prototype = instance3(constructor3构造生成),</span><br><span class="line">constructor3.prototype = instance4(constructor4构造生成)..... 此类关系的链结构中查找，直到原型对象的顶端<span class="built_in">Object</span>.prototype</span><br><span class="line">搜索轨迹: instance1--&gt; instance2 --&gt; constructor2.prototype.......--&gt;<span class="built_in">Object</span>.prototype</span><br><span class="line">这种搜多轨迹形成一条长链，并且是由prototype或者说__proto__属性充当链接作用，于是就把这种实例对象与原型对象之间的链条叫做原型链。</span><br></pre></td></tr></table></figure></p>
 <p> 下边举个例子<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.fatherName = <span class="string">'father'</span></span><br><span class="line">  <span class="keyword">this</span>.age = <span class="string">'40'</span></span><br><span class="line">&#125;</span><br><span class="line">Father.prototype.getFatherName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">`this is fatherName <span class="subst">$&#123;<span class="keyword">this</span>.fatherName&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Son</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.sonName = <span class="string">'son'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Son 继承Father</span></span><br><span class="line">Son.prototype = <span class="keyword">new</span> Father() <span class="comment">// Son.prototype被重写，导致Son.prototype.constructor一并被改写为构造函数Father</span></span><br><span class="line">Son.prototype.getSonName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">`this is sonName <span class="subst">$&#123;<span class="keyword">this</span>.sonName&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> Son()</span><br><span class="line"><span class="built_in">console</span>.log(instance.getFatherName()) <span class="comment">// this is fatherName father</span></span><br><span class="line"><span class="built_in">console</span>.log(Son.prototype.constructor) <span class="comment">// Father() &#123;this.fatherName = 'father'&#125;</span></span><br><span class="line">Son.prototype.constructor = Son <span class="comment">//  将Son的原型对象的constructor属性重置回Son</span></span><br><span class="line"><span class="built_in">console</span>.log(Son.prototype.constructor) <span class="comment">// Son() &#123;this.sonName = 'son'&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(instance.age) <span class="comment">// 40 继承了Father的age属性</span></span><br></pre></td></tr></table></figure></p>
 <p>上边例子可以看到，instance通过原型链找到了Father原型对象中的getFatherName方法，并且也继承了Father该构造函数中声明的age属性</p>
+<p>——————————————————————————————————</p>
+<h2 id="JS继承之源"><a href="#JS继承之源" class="headerlink" title="JS继承之源"></a>JS继承之源</h2><p>  根据上述内容的解释，基本掌握原型链继承的原理之后，势必会触及到Object.prototype和Function.prototype的概念,慢慢展开根据protptype和<strong>proto</strong>来推出函数和对象的深层关系</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li>prototype是函数有且必有的一个属性，指向函数的原型对象</li>
+<li><p><strong>proto</strong>是对象的内部有且必有的属性，它指向实例对象的构造器函数的原型对象，在我们引用对象的属性或方法时候，对象依赖此属性进行原型链查询，instanceof也是依赖它来判断是否存在继承关系 </p>
+<p>值得强调的是，只有函数才有prototype属性，其余非函数对象不具有该属性；而<strong>proto</strong>是对象内部的属性，每一个对象都有该属性</p>
+<ul>
+<li><p>举个例子来看</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> p1 = <span class="keyword">new</span> Person(<span class="string">'louis'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Person.prototype);<span class="comment">//Person原型 &#123;constructor: Person(name),__proto__: Object&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(p1.prototype);<span class="comment">//undefined</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Person.__proto__);<span class="comment">//空函数, ƒ () &#123; [native code] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(p1.__proto__ == Person.prototype);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再来个例子来展示原型链查询的细节</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> obj = &#123;<span class="attr">name</span>: <span class="string">'jack'</span>&#125;,</span><br><span class="line">    arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">    reg = <span class="regexp">/hello/g</span>,</span><br><span class="line">    date = <span class="keyword">new</span> <span class="built_in">Date</span>,</span><br><span class="line">    err = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'exception'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj.__proto__  === <span class="built_in">Object</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(arr.__proto__  === <span class="built_in">Array</span>.prototype);  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.__proto__  === <span class="built_in">RegExp</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(date.__proto__ === <span class="built_in">Date</span>.prototype);   <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(err.__proto__  === <span class="built_in">Error</span>.prototype);  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>根据例子分析，根据对象字面量和new关键字创建的对象，无一例外，内部的<strong>proto</strong>属性全部指向了构造器函数的原型(prototype),也再一次佐证了，对象是通过内部属性<strong>proto</strong>实现原型链查找的。<br>但是注意到Person.<strong>proto</strong> 的结果为ƒ () { [native code] }，但是这个空函数到底是什么？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(Person.__proto__ === <span class="built_in">Function</span>.prototype);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>Person是构造器，但也是函数，因此Person的<strong>proto</strong>属性指向函数(function)的原型，即Function.prototype<br>但这应该怎么理解？<br>我们尝试假设一下，是不是所有的构造器函数的<strong>proto</strong>属性都是指向Function.prototype呢？</p>
+<ul>
+<li>我们来验证一下<br>js中有内置的构造器函数或者说构造器对象，一共13个，其中Global无法直接访问，Arguments只有在函数调用的时候，由JS引擎创建，Math<br>、JSON是以对象的形势存在的，使用的时候无需new,我们使用的时候都是直接使用其静态属性或者静态方法，而不是必须先new出来一个实例，然后再调用实例的属性或者方法。我们知道，所有的对象都有<strong>proto</strong>属性，并且指向其构造器函数对应的原型对象。因此将这个13个内置构造器对象分成了三类，Global、Arguments不做讨论，Math、JSON按照一般意义的对象来讨论，其余的9个构造器函数按照函数的角度来讨论。</li>
+</ul>
+</li>
+<li><p>对象形式存在的Math、JSON</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.__proto__ === <span class="built_in">Object</span>.prototype);  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.__proto__ === <span class="built_in">Object</span>.prototype);  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构造起函数形式存在的Object, Function, Date, RegExp, Array, Number, Boolean, String, Error</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>.__proto__   === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>.__proto__  === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.__proto__   === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.__proto__   === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.__proto__    === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">RegExp</span>.__proto__   === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Error</span>.__proto__    === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Date</span>.__proto__     === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>根据例子，我们确认所有的构造器函数的<strong>proto</strong>属性都是来自于Function.prototype,那么Function.prototype到底是什么呢？</p>
+<h3 id="单独讨论-Function-prototype"><a href="#单独讨论-Function-prototype" class="headerlink" title="单独讨论 Function.prototype"></a>单独讨论 Function.prototype</h3><p>借助tyoeof运算符来查看类型<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Function</span>.prototype) <span class="comment">// function</span></span><br></pre></td></tr></table></figure></p>
+<p>由此，我们知道Function.prototype的类型是fucntion，但实际上只有Function这一个构造器函数的原型对象，类型是function，其余的构造器函数全部是object，有代码为证：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Number</span>.prototype)   <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Boolean</span>.prototype)  <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">String</span>.prototype)   <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Object</span>.prototype)   <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Array</span>.prototype)    <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">RegExp</span>.prototype)   <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Error</span>.prototype)    <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Date</span>.prototype)     <span class="comment">// object</span></span><br></pre></td></tr></table></figure>
+<p>接着去思考，既然Function.prototype是一个函数，那么它肯定有<strong>proto</strong>属性，但是它指向哪里？<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype) <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<p>由此我们分析，Function.prototype是一个函数，但是<strong>proto</strong>属性是对象拥有的属性，并且一个函数的<strong>proto</strong>属性，居然指向了对象的构造器原型。<br>是不是也意味着Function.prototype也是一个对象,实际上，js的世界里，一切都是对象，只不过函数是一等公民</p>
+<h3 id="单独讨论-Object-prototype"><a href="#单独讨论-Object-prototype" class="headerlink" title="单独讨论 Object.prototype"></a>单独讨论 Object.prototype</h3><p>普通函数的<strong>proto</strong>的属性指向Function.prototype,<br>Function.prototype函数的<strong>proto</strong>属性指向Object.prototype,<br>所以，Object.prototype.<strong>proto</strong>指向又是什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(Object.prototype.__proto__ === null);//true</span><br></pre></td></tr></table></figure></p>
+<p>到此，已经到了js的顶部边界，js世界的源头竟然是一片荒芜，裤子顿时就湿了</p>
 
       
     </div>
@@ -535,7 +569,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -660,7 +694,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#深入理解原型与与原型链"><span class="nav-number">1.</span> <span class="nav-text">深入理解原型与与原型链</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数-原型-实例的关系"><span class="nav-number">1.0.1.</span> <span class="nav-text">构造函数  原型 实例的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js-原型链查找规则"><span class="nav-number">1.0.2.</span> <span class="nav-text">js 原型链查找规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型对象指向另一个构造函数的实例"><span class="nav-number">1.0.3.</span> <span class="nav-text">原型对象指向另一个构造函数的实例</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#深入理解原型与与原型链"><span class="nav-number">1.</span> <span class="nav-text">深入理解原型与与原型链</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数-原型-实例的关系"><span class="nav-number">1.0.1.</span> <span class="nav-text">构造函数  原型 实例的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js-原型链查找规则"><span class="nav-number">1.0.2.</span> <span class="nav-text">js 原型链查找规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型对象指向另一个构造函数的实例"><span class="nav-number">1.0.3.</span> <span class="nav-text">原型对象指向另一个构造函数的实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS继承之源"><span class="nav-number">1.1.</span> <span class="nav-text">JS继承之源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">1.1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单独讨论-Function-prototype"><span class="nav-number">1.1.2.</span> <span class="nav-text">单独讨论 Function.prototype</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单独讨论-Object-prototype"><span class="nav-number">1.1.3.</span> <span class="nav-text">单独讨论 Object.prototype</span></a></li></ol></li></ol></div>
             
 
           </div>

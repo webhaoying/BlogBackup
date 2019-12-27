@@ -291,6 +291,179 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://webhaoying.github.io/2019/12/27/深入分析JS的继承模式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kfpanda">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kfpanda">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/27/深入分析JS的继承模式/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-27T11:36:31+08:00">
+                2019-12-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-27T13:49:59+08:00">
+                2019-12-27
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/konwledge/" itemprop="url" rel="index">
+                    <span itemprop="name">konwledge</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/konwledge/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="深入分析JS的继承模式"><a href="#深入分析JS的继承模式" class="headerlink" title="深入分析JS的继承模式"></a>深入分析JS的继承模式</h1><p>[JS原型链与继承别再被问倒了]<a href="https://juejin.im/post/58f94c9bb123db411953691b" target="_blank" rel="noopener">https://juejin.im/post/58f94c9bb123db411953691b</a> (主要)</p>
+<p>[从prototype与<strong>proto</strong>窥探JS继承之源]<a href="https://juejin.im/post/58f9d0290ce46300611ada65(主要)" target="_blank" rel="noopener">https://juejin.im/post/58f9d0290ce46300611ada65(主要)</a><br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JavaScript是一门完全面向对象的语言，如果想要更好地使用JavaScript的面向对象系统，原型和原型链就是个绕不开的话题。 </span><br><span class="line">原型及其原型链通过学习借鉴，自己加以汇总总结于此。</span><br><span class="line">原型链本身就是一种继承，讨论一下本身的</span><br></pre></td></tr></table></figure></p>
+<h3 id="原型链的问题"><a href="#原型链的问题" class="headerlink" title="原型链的问题"></a>原型链的问题</h3><p>  原型链继承的时候，存在两个问题</p>
+<ul>
+<li>1、当原型链中存在引用类型的值的时候，由于该值被所有的实例继承，因此该值会被多有的实例共享，即‘一个实例改变了原型链中的引用类型值，则别的实例也就跟着变了’</li>
+<li>2、在创建实例（子类型）的时候，不能像构造函数（父类型）传递参数<br>问题2显而易见，下边举例子说明问题1<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Human</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">'人类'</span></span><br><span class="line">  <span class="keyword">this</span>.family = &#123; </span><br><span class="line">    father:<span class="string">'father'</span>,</span><br><span class="line">    mother:<span class="string">'mother'</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Human.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'this is name prop'</span>, <span class="keyword">this</span>.name)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'this is family prop'</span>, <span class="keyword">this</span>.family.father)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Family</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Family.prototype = <span class="keyword">new</span> Human()</span><br><span class="line"><span class="keyword">var</span> male = <span class="keyword">new</span> Family()</span><br><span class="line"><span class="built_in">console</span>.log(male.getName()) <span class="comment">//  this is name prop 人类, this is family prop father</span></span><br><span class="line">male.name = <span class="string">'男性'</span></span><br><span class="line">male.family.father = <span class="string">'sonFather'</span></span><br><span class="line"><span class="keyword">var</span> female = <span class="keyword">new</span> Family()</span><br><span class="line"><span class="built_in">console</span>.log(male.getName()) <span class="comment">// this is name prop 男性, this is family prop sonFather</span></span><br><span class="line"><span class="built_in">console</span>.log(female.getName()) <span class="comment">// this is name prop 人类, this is family prop sonFather</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>由上, 可以发现，我们利用Human构造函数创建了实例male，修改male实例中的name属性后，不会影响在male之后创建的实例female，但是修改实例的引用类型属性family的时候， 新创建的实例female的family属性值也会跟着变化。这个大多数场景并不是我们想要的结果，因为不可控。<br>因此，实际中很少单独使用原型链进行继承。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://webhaoying.github.io/2019/03/01/life-is-hard/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -748,7 +921,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/18/原型与与原型链详解/" itemprop="url">原型与与原型链详解</a></h1>
+                <a class="post-title-link" href="/2019/02/18/原型与与原型链详解/" itemprop="url">原型与与原型链详解及JS继承之源</a></h1>
         
 
         <div class="post-meta">
@@ -776,8 +949,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-26T15:39:58+08:00">
-                2019-12-26
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-27T11:33:37+08:00">
+                2019-12-27
               </time>
             
           </span>
@@ -846,9 +1019,7 @@
         
           
             <pre><code>立个flag，新的一年开始了，我表示很开心。
-</code></pre><ul>
-<li><h1 id="深入理解原型与与原型链"><a href="#深入理解原型与与原型链" class="headerlink" title="深入理解原型与与原型链"></a>深入理解原型与与原型链</h1>[参考1]<a href="https://www.cnblogs.com/dengpeng1004/p/5317245.html" target="_blank" rel="noopener">https://www.cnblogs.com/dengpeng1004/p/5317245.html</a></li>
-</ul>
+</code></pre><h1 id="深入理解原型与与原型链"><a href="#深入理解原型与与原型链" class="headerlink" title="深入理解原型与与原型链"></a>深入理解原型与与原型链</h1><p>[参考1]<a href="https://www.cnblogs.com/dengpeng1004/p/5317245.html" target="_blank" rel="noopener">https://www.cnblogs.com/dengpeng1004/p/5317245.html</a></p>
 <p>[参考2]<a href="https://blog.csdn.net/baidu_31333625/article/details/54613438" target="_blank" rel="noopener">https://blog.csdn.net/baidu_31333625/article/details/54613438</a></p>
 <p>[JS原型链与继承别再被问倒了]<a href="https://juejin.im/post/58f94c9bb123db411953691b" target="_blank" rel="noopener">https://juejin.im/post/58f94c9bb123db411953691b</a> (主要)</p>
 <p>[从prototype与<strong>proto</strong>窥探JS继承之源]<a href="https://juejin.im/post/58f9d0290ce46300611ada65(主要)" target="_blank" rel="noopener">https://juejin.im/post/58f9d0290ce46300611ada65(主要)</a><br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaScript是一门完全面向对象的语言，如果想要更好地使用JavaScript的面向对象系统，原型和原型链就是个绕不开的话题。</span><br></pre></td></tr></table></figure></p>
@@ -858,6 +1029,42 @@
 </code></pre><p> 回到我们本节讨论的话题: 原型对象指向另一个构造函数的实例,即：当constructor1.prototype = instance2<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">讨论的前提条件： 现有构造函数constructor1，并且由该函数构造出来的实例对象instance1，同理也有constcutor2以及由其构造出来的instance2. 并且constructor1.prototype = instance2</span><br><span class="line">如果试图引用constructor1构造的实例instance1的某个属性或方法，则会由如下场景：</span><br><span class="line"><span class="number">1</span>、首先在实例对象instance1内部属性或者方法中查找一遍，找到则停止执行以下步骤</span><br><span class="line"><span class="number">2</span>、如果<span class="number">1</span>找不到，接着会在实例对象的原型链中寻找，即前往实例对象的构造函数的原型对象中寻找，即：会在instance1.__proto__(constructor1.prototype)中找一遍，此时发现，constructor1.prototype实际上就是instance2，也就是在instance2中查找，这样从一个实例中查找，跳到了另一个实例中查找，两个实例间就建立起了原型链的关系(实际上是通过对象内部有且必有的__proto__属性)。如果找到则停止执行以下步骤</span><br><span class="line"><span class="number">3</span>、如果instance2中仍旧没有找到，程序会继续在instance2.__proto__(constructor2.prototype)寻找，以次类推，如果还没有找到，还会继续沿着存在诸如constructor2.prototype = instance3(constructor3构造生成),</span><br><span class="line">constructor3.prototype = instance4(constructor4构造生成)..... 此类关系的链结构中查找，直到原型对象的顶端<span class="built_in">Object</span>.prototype</span><br><span class="line">搜索轨迹: instance1--&gt; instance2 --&gt; constructor2.prototype.......--&gt;<span class="built_in">Object</span>.prototype</span><br><span class="line">这种搜多轨迹形成一条长链，并且是由prototype或者说__proto__属性充当链接作用，于是就把这种实例对象与原型对象之间的链条叫做原型链。</span><br></pre></td></tr></table></figure></p>
 <p> 下边举个例子<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.fatherName = <span class="string">'father'</span></span><br><span class="line">  <span class="keyword">this</span>.age = <span class="string">'40'</span></span><br><span class="line">&#125;</span><br><span class="line">Father.prototype.getFatherName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">`this is fatherName <span class="subst">$&#123;<span class="keyword">this</span>.fatherName&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Son</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.sonName = <span class="string">'son'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Son 继承Father</span></span><br><span class="line">Son.prototype = <span class="keyword">new</span> Father() <span class="comment">// Son.prototype被重写，导致Son.prototype.constructor一并被改写为构造函数Father</span></span><br><span class="line">Son.prototype.getSonName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">`this is sonName <span class="subst">$&#123;<span class="keyword">this</span>.sonName&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> Son()</span><br><span class="line"><span class="built_in">console</span>.log(instance.getFatherName()) <span class="comment">// this is fatherName father</span></span><br><span class="line"><span class="built_in">console</span>.log(Son.prototype.constructor) <span class="comment">// Father() &#123;this.fatherName = 'father'&#125;</span></span><br><span class="line">Son.prototype.constructor = Son <span class="comment">//  将Son的原型对象的constructor属性重置回Son</span></span><br><span class="line"><span class="built_in">console</span>.log(Son.prototype.constructor) <span class="comment">// Son() &#123;this.sonName = 'son'&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(instance.age) <span class="comment">// 40 继承了Father的age属性</span></span><br></pre></td></tr></table></figure></p>
 <p>上边例子可以看到，instance通过原型链找到了Father原型对象中的getFatherName方法，并且也继承了Father该构造函数中声明的age属性</p>
+<p>——————————————————————————————————</p>
+<h2 id="JS继承之源"><a href="#JS继承之源" class="headerlink" title="JS继承之源"></a>JS继承之源</h2><p>  根据上述内容的解释，基本掌握原型链继承的原理之后，势必会触及到Object.prototype和Function.prototype的概念,慢慢展开根据protptype和<strong>proto</strong>来推出函数和对象的深层关系</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li>prototype是函数有且必有的一个属性，指向函数的原型对象</li>
+<li><p><strong>proto</strong>是对象的内部有且必有的属性，它指向实例对象的构造器函数的原型对象，在我们引用对象的属性或方法时候，对象依赖此属性进行原型链查询，instanceof也是依赖它来判断是否存在继承关系 </p>
+<p>值得强调的是，只有函数才有prototype属性，其余非函数对象不具有该属性；而<strong>proto</strong>是对象内部的属性，每一个对象都有该属性</p>
+<ul>
+<li><p>举个例子来看</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> p1 = <span class="keyword">new</span> Person(<span class="string">'louis'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Person.prototype);<span class="comment">//Person原型 &#123;constructor: Person(name),__proto__: Object&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(p1.prototype);<span class="comment">//undefined</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Person.__proto__);<span class="comment">//空函数, ƒ () &#123; [native code] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(p1.__proto__ == Person.prototype);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再来个例子来展示原型链查询的细节</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> obj = &#123;<span class="attr">name</span>: <span class="string">'jack'</span>&#125;,</span><br><span class="line">    arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">    reg = <span class="regexp">/hello/g</span>,</span><br><span class="line">    date = <span class="keyword">new</span> <span class="built_in">Date</span>,</span><br><span class="line">    err = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'exception'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj.__proto__  === <span class="built_in">Object</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(arr.__proto__  === <span class="built_in">Array</span>.prototype);  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.__proto__  === <span class="built_in">RegExp</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(date.__proto__ === <span class="built_in">Date</span>.prototype);   <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(err.__proto__  === <span class="built_in">Error</span>.prototype);  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>根据例子分析，根据对象字面量和new关键字创建的对象，无一例外，内部的<strong>proto</strong>属性全部指向了构造器函数的原型(prototype),也再一次佐证了，对象是通过内部属性<strong>proto</strong>实现原型链查找的。<br>但是注意到Person.<strong>proto</strong> 的结果为ƒ () { [native code] }，但是这个空函数到底是什么？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(Person.__proto__ === <span class="built_in">Function</span>.prototype);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>Person是构造器，但也是函数，因此Person的<strong>proto</strong>属性指向函数(function)的原型，即Function.prototype<br>但这应该怎么理解？<br>我们尝试假设一下，是不是所有的构造器函数的<strong>proto</strong>属性都是指向Function.prototype呢？</p>
+<ul>
+<li>我们来验证一下<br>js中有内置的构造器函数或者说构造器对象，一共13个，其中Global无法直接访问，Arguments只有在函数调用的时候，由JS引擎创建，Math<br>、JSON是以对象的形势存在的，使用的时候无需new,我们使用的时候都是直接使用其静态属性或者静态方法，而不是必须先new出来一个实例，然后再调用实例的属性或者方法。我们知道，所有的对象都有<strong>proto</strong>属性，并且指向其构造器函数对应的原型对象。因此将这个13个内置构造器对象分成了三类，Global、Arguments不做讨论，Math、JSON按照一般意义的对象来讨论，其余的9个构造器函数按照函数的角度来讨论。</li>
+</ul>
+</li>
+<li><p>对象形式存在的Math、JSON</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.__proto__ === <span class="built_in">Object</span>.prototype);  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.__proto__ === <span class="built_in">Object</span>.prototype);  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构造起函数形式存在的Object, Function, Date, RegExp, Array, Number, Boolean, String, Error</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>.__proto__   === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>.__proto__  === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.__proto__   === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.__proto__   === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.__proto__    === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">RegExp</span>.__proto__   === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Error</span>.__proto__    === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Date</span>.__proto__     === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>根据例子，我们确认所有的构造器函数的<strong>proto</strong>属性都是来自于Function.prototype,那么Function.prototype到底是什么呢？</p>
+<h3 id="单独讨论-Function-prototype"><a href="#单独讨论-Function-prototype" class="headerlink" title="单独讨论 Function.prototype"></a>单独讨论 Function.prototype</h3><p>借助tyoeof运算符来查看类型<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Function</span>.prototype) <span class="comment">// function</span></span><br></pre></td></tr></table></figure></p>
+<p>由此，我们知道Function.prototype的类型是fucntion，但实际上只有Function这一个构造器函数的原型对象，类型是function，其余的构造器函数全部是object，有代码为证：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Number</span>.prototype)   <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Boolean</span>.prototype)  <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">String</span>.prototype)   <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Object</span>.prototype)   <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Array</span>.prototype)    <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">RegExp</span>.prototype)   <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Error</span>.prototype)    <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Date</span>.prototype)     <span class="comment">// object</span></span><br></pre></td></tr></table></figure>
+<p>接着去思考，既然Function.prototype是一个函数，那么它肯定有<strong>proto</strong>属性，但是它指向哪里？<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype) <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<p>由此我们分析，Function.prototype是一个函数，但是<strong>proto</strong>属性是对象拥有的属性，并且一个函数的<strong>proto</strong>属性，居然指向了对象的构造器原型。<br>是不是也意味着Function.prototype也是一个对象,实际上，js的世界里，一切都是对象，只不过函数是一等公民</p>
+<h3 id="单独讨论-Object-prototype"><a href="#单独讨论-Object-prototype" class="headerlink" title="单独讨论 Object.prototype"></a>单独讨论 Object.prototype</h3><p>普通函数的<strong>proto</strong>的属性指向Function.prototype,<br>Function.prototype函数的<strong>proto</strong>属性指向Object.prototype,<br>所以，Object.prototype.<strong>proto</strong>指向又是什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(Object.prototype.__proto__ === null);//true</span><br></pre></td></tr></table></figure></p>
+<p>到此，已经到了js的顶部边界，js世界的源头竟然是一片荒芜，裤子顿时就湿了</p>
 
           
         
@@ -1719,230 +1926,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://webhaoying.github.io/2017/08/13/information/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="kfpanda">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avator.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="kfpanda">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/13/information/" itemprop="url">hexo+github搭建自己的微博详解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-13T17:14:31+08:00">
-                2017-08-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-26T19:06:29+08:00">
-                2018-12-26
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><h1 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h1><ul>
-<li>该博客使用hexo 搭建私人博客基本的配置文件备份。</li>
-<li>该仓库是使用了next主题，针对的主题的讲解，全部基于next主题 </li>
-</ul>
-</li>
-<li><h1 id="内容简介"><a href="#内容简介" class="headerlink" title="内容简介"></a>内容简介</h1><ul>
-<li>感谢牛人分享，本文参考借鉴<a href="http://blog.csdn.net/jzooo/article/details/46781805" target="_blank" rel="noopener">hexo+github部署</a></li>
-</ul>
-</li>
-<li><h1 id="搭建详解"><a href="#搭建详解" class="headerlink" title="搭建详解"></a>搭建详解</h1><h2 id="github上创建一个仓库"><a href="#github上创建一个仓库" class="headerlink" title="github上创建一个仓库"></a>github上创建一个仓库</h2><ul>
-<li>1、github上新建一个仓库，名字格式必须为：yourname.github.io,其中yourname必须与你的注册用户名字一致<h2 id="本地环境搭建"><a href="#本地环境搭建" class="headerlink" title="本地环境搭建"></a>本地环境搭建</h2></li>
-<li>1、首先确保正确的安装git、node</li>
-<li><p>2、npm安装本地环境</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo --save   //自己选定的目录下安装hexo</span><br><span class="line">hexo -v // 查看hexo是否安装正确，正确的话会显示版本号</span><br><span class="line">hexo init // 本地初始化hexo 会生成package.json等文件</span><br><span class="line">npm install // 根据package.json文件进行依赖安装</span><br><span class="line">hexo s -g //此时就会在localhost:4000看到自己的个人博客 (4000端口是系统默认,也可自定义，参见)</span><br></pre></td></tr></table></figure>
-<h2 id="管理博客"><a href="#管理博客" class="headerlink" title="管理博客"></a>管理博客</h2></li>
-</ul>
-<ul>
-<li><p>主要就是指的_config.yml文件的配置，其中各项配置都有详细的<a href="http://blog.csdn.net/jzooo/article/details/46781805" target="_blank" rel="noopener">配置的注释和教程</a>.</p>
-<h2 id="发表文章"><a href="#发表文章" class="headerlink" title="发表文章"></a>发表文章</h2></li>
-</ul>
-<ul>
-<li><p>新建博客文章</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &apos;hello&apos; //就会生成一个新的文章hello.md  然后进行编辑</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>基本格式如下：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">title: hello</span><br><span class="line">date: 2015-07-01 22:37:23</span><br><span class="line">categories:</span><br><span class="line">    - 日志</span><br><span class="line">    - 二级目录</span><br><span class="line">tags:</span><br><span class="line">    - hello</span><br><span class="line"></span><br><span class="line">摘要:</span><br><span class="line">&lt;!--more--&gt; </span><br><span class="line">正文:前边加上了&quot;\&lt;!--more--&gt;&quot;之后就会在blog中显示出来一个显示更多的按钮。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>部署和发布博客文章</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save //一个辅助部署的插件</span><br><span class="line">hexo d -g  //生成并且部署，其实可以先在本地看效果，然后在生成并且部署，</span><br><span class="line">            //在本地的localhose:4000先看看一下效果，整体的写好了之后，在进行部署</span><br><span class="line">hexo s //开启本地服务器，最新的页面更改就可以在localhost:4000              //查看最新页面效果和内容</span><br><span class="line">hexo g //生成，生成页面文件之类的</span><br><span class="line">hexo d //部署到线上，也就是完成本地仓库与GitHub 中自己新建的博客仓库上传代码</span><br></pre></td></tr></table></figure>
-<h2 id="浏览博客"><a href="#浏览博客" class="headerlink" title="浏览博客"></a>浏览博客</h2></li>
-</ul>
-<ul>
-<li>输入网址：youname.github.io 就可以看到自己的博客文章了</li>
-</ul>
-</li>
-<li><h1 id="更换电脑后的继续开发"><a href="#更换电脑后的继续开发" class="headerlink" title="更换电脑后的继续开发"></a>更换电脑后的继续开发</h1></li>
-<li><h2 id="对项目中的文件进行归类"><a href="#对项目中的文件进行归类" class="headerlink" title="对项目中的文件进行归类"></a>对项目中的文件进行归类</h2></li>
-<li><h3 id="更换电脑需要复制的文件或者文件夹"><a href="#更换电脑需要复制的文件或者文件夹" class="headerlink" title="更换电脑需要复制的文件或者文件夹"></a>更换电脑需要复制的文件或者文件夹</h3><ul>
-<li>_configyml 站点的配置文件 很重要，已经按照自己的风格配置好了。</li>
-<li>theme  文件夹中包含主体的源文件，主体中的_configyml 文件，是该主题的配置文件。</li>
-<li>source 文件里边存储着自己主页风格的配置模板文件，_posts文件夹中是自己的博客文章内内容。</li>
-<li>scaffolds 脚手架文件（即博客的模板框架）</li>
-<li>package.json 一个配置文件，里边包含这站点的安装依赖文件列表。</li>
-</ul>
-</li>
-<li><h3 id="更换电脑不需要复制的文件或者文件夹"><a href="#更换电脑不需要复制的文件或者文件夹" class="headerlink" title="更换电脑不需要复制的文件或者文件夹"></a>更换电脑不需要复制的文件或者文件夹</h3><ul>
-<li>.deploy_git 这个文件夹是hexo deploy的时候自动生成的，这个文件夹是一个git仓库，与github上的<a href="https://github.com/webhaoying/webhaoying.github.io" target="_blank" rel="noopener">博客网站仓库</a>,建立着本地和远程仓库的关系</li>
-<li>public 文件夹也是在hexo deploy 时候生成的，</li>
-<li>node_modules 这个文件夹里边装着npm install 之后安装的文件。</li>
-</ul>
-</li>
-<li><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1></li>
-</ul>
-<ul>
-<li>&nbsp;&nbsp;&nbsp;简单来讲，就是完成一个新的hexo开发环境，并且将原有blog开发环境中需要迁移的文件，复制到新的开发环境中去。需要迁移的文件：配置文件_config.yml、项目搭建的模板scaffolds、原有博客的笔记source、原有项目中的主体theme、项目构建的依赖package.json. 因此  需要将自己写blog的时候的文件备份一份，以便于以后若是更换了电脑，能够找到上述的文件，这样就可以保证在之前的文章的基础上，继续写blog。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1984,7 +1974,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

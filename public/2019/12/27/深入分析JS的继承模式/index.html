@@ -102,7 +102,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="text,">
+  <meta name="keywords" content="js,konwledge,">
 
 
 
@@ -118,18 +118,18 @@
 
 
 
-<meta name="description" content="1今天看了一个演讲段视频，很惊艳。 &amp;emsp;&amp;emsp;记不记得2018年年初的时候，我们在咖啡馆里天天在讲什么？三个亿的生意、五个亿的生意、A轮、B轮、C轮，都在讲海外收购，建港口、建电站……。我跟父母讲，你记不记得2018年上个礼拜我们在咖啡馆里你听他们在讲什么？在讲逻辑思维。大家知道什么叫经济转型，经济转型就是死掉旧的，活出新的。中国经济为什么会转型呢，第一大动力人便宜，真的人便宜，想想">
-<meta name="keywords" content="text">
+<meta name="description" content="深入分析JS的继承模式[JS原型链与继承别再被问倒了]https://juejin.im/post/58f94c9bb123db411953691b (主要) [从prototype与proto窥探JS继承之源]https://juejin.im/post/58f9d0290ce46300611ada65(主要)  123JavaScript是一门完全面向对象的语言，如果想要更好地使用JavaSc">
+<meta name="keywords" content="js,konwledge">
 <meta property="og:type" content="article">
-<meta property="og:title" content="life">
-<meta property="og:url" content="https://webhaoying.github.io/2019/03/01/life/index.html">
+<meta property="og:title" content="kfpanda">
+<meta property="og:url" content="https://webhaoying.github.io/2019/12/27/深入分析JS的继承模式/index.html">
 <meta property="og:site_name" content="kfpanda">
-<meta property="og:description" content="1今天看了一个演讲段视频，很惊艳。 &amp;emsp;&amp;emsp;记不记得2018年年初的时候，我们在咖啡馆里天天在讲什么？三个亿的生意、五个亿的生意、A轮、B轮、C轮，都在讲海外收购，建港口、建电站……。我跟父母讲，你记不记得2018年上个礼拜我们在咖啡馆里你听他们在讲什么？在讲逻辑思维。大家知道什么叫经济转型，经济转型就是死掉旧的，活出新的。中国经济为什么会转型呢，第一大动力人便宜，真的人便宜，想想">
+<meta property="og:description" content="深入分析JS的继承模式[JS原型链与继承别再被问倒了]https://juejin.im/post/58f94c9bb123db411953691b (主要) [从prototype与proto窥探JS继承之源]https://juejin.im/post/58f9d0290ce46300611ada65(主要)  123JavaScript是一门完全面向对象的语言，如果想要更好地使用JavaSc">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-01T14:10:06.000Z">
+<meta property="og:updated_time" content="2019-12-27T05:49:59.201Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="life">
-<meta name="twitter:description" content="1今天看了一个演讲段视频，很惊艳。 &amp;emsp;&amp;emsp;记不记得2018年年初的时候，我们在咖啡馆里天天在讲什么？三个亿的生意、五个亿的生意、A轮、B轮、C轮，都在讲海外收购，建港口、建电站……。我跟父母讲，你记不记得2018年上个礼拜我们在咖啡馆里你听他们在讲什么？在讲逻辑思维。大家知道什么叫经济转型，经济转型就是死掉旧的，活出新的。中国经济为什么会转型呢，第一大动力人便宜，真的人便宜，想想">
+<meta name="twitter:title" content="kfpanda">
+<meta name="twitter:description" content="深入分析JS的继承模式[JS原型链与继承别再被问倒了]https://juejin.im/post/58f94c9bb123db411953691b (主要) [从prototype与proto窥探JS继承之源]https://juejin.im/post/58f9d0290ce46300611ada65(主要)  123JavaScript是一门完全面向对象的语言，如果想要更好地使用JavaSc">
 
 
 
@@ -158,13 +158,13 @@
 
 
 
-  <link rel="canonical" href="https://webhaoying.github.io/2019/03/01/life/">
+  <link rel="canonical" href="https://webhaoying.github.io/2019/12/27/深入分析JS的继承模式/">
 
 
 
 
 
-  <title>life | kfpanda</title>
+  <title> | kfpanda</title>
   
 
 
@@ -291,7 +291,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://webhaoying.github.io/2019/03/01/life/">
+    <link itemprop="mainEntityOfPage" href="https://webhaoying.github.io/2019/12/27/深入分析JS的继承模式/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="kfpanda">
@@ -308,7 +308,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">life</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -320,8 +320,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-01T22:07:24+08:00">
-                2019-03-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-27T11:36:31+08:00">
+                2019-12-27
               </time>
             
 
@@ -336,12 +336,45 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-01T22:10:06+08:00">
-                2019-03-01
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-27T13:49:59+08:00">
+                2019-12-27
               </time>
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/konwledge/" itemprop="url" rel="index">
+                    <span itemprop="name">konwledge</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/konwledge/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -370,8 +403,15 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">今天看了一个演讲段视频，很惊艳。</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;记不记得2018年年初的时候，我们在咖啡馆里天天在讲什么？三个亿的生意、五个亿的生意、A轮、B轮、C轮，都在讲海外收购，建港口、建电站……。我跟父母讲，你记不记得2018年上个礼拜我们在咖啡馆里你听他们在讲什么？在讲逻辑思维。大家知道什么叫经济转型，经济转型就是死掉旧的，活出新的。中国经济为什么会转型呢，第一大动力人便宜，真的人便宜，想想九十年代初的农民工，今天人便宜吗？你想想看现在在北京雇一个人刷一天墙多少钱？刷一天，在北京今天一般会超过450块钱。你的劳动力建立在劳动便宜上的出口，绝对下降，越南工人一个月1200，你怎么竞争？非洲工人一个月500。那么第二呢，城市化初期的红利，基建、水泥、玻璃、钢筋啊，那时候你在城市间盖一个商场，一下子经济就上来了，现在盖商场有人去吗？第三个，人口的红利，过去三十年多少年轻人进城啊，年轻人买了多少东西啊，改善了多少生活啊，今天是老龄化的时代，你们知道什么后果，没有消费，讲了怎么多，我为什么还这么有信心，我们这个民族的三千年，我为什么不说五千年，我说的是详细历史记载的三千年农耕历史，就是一部危机史。中华民族是全世界经受危机最多、具有最强烈的应对危机的意识和经验的民族，这就是我们高储蓄率的根本原因。<br>&emsp;&emsp;我讲讲中国为什么不会成为很多掉入危机都爬不起来的国家，第一点，中国人是全世界最勤劳的民族，别看不起农民，我们每个人都是农民，中国农民有什么特点，你们知道吗？土地少，干到死，今年大丰收，明年不干活一样饿死，所以所有中国式的小农，就是公蚁。拼命的干、拼命的干、拼命的干，我跟我的法国朋友一直讲，我说不该我们没饭吃你知道吗?真的不该，他是教授、我也是教授，他老说你们中国人这二十年日子过的够好了，该你们过不好的日子了，我说你错了，我说这个世界上轮得着谁没饭吃，都轮不着这个国家人没饭吃，你知道为什么？我说你一个礼拜工作多少小时？他说我一个礼拜工作十个小时，我说我从三十岁到现在，没有一天干工作在十个小时以内！不要鼓掌啊，我们每个中年男子脸上不都写着猝死的样子吗？这么努力的民族怎么可能被危机击垮。我一直跟他们讲，市场经济最适合中国，为什么？市场经济和平交换，靠酬劳、靠聪明，中国人的强项！第二个理由，中国人是世界上最聪明的民族，因为小农，中国的农民地少，他没有资格过西欧农民那种自给自足不需要交换的生活，中国的农民必须做生意，他不仅要种地，还要到市场上去交换，他不交换他活不下来，所以在南方你们稍微仔细看，每四到六个自然村中一定会有个集镇，用于市场交换，这种集镇的存在就是浙商的根本。你可以发现中国农民不会写字，但是没有一个口算差，我们数学特别好。我一直跟他们讲，中国没有中等收入陷阱问题，中国怎么可能，中国多重视教育啊，中国有六百二十万一线的工程师，这个数量赶上了欧洲一些国家人口的总和，这种国家是不可能陷入中等收入陷阱，陷入中等收入陷阱的国家是不重视教育的国家，是不重视子女的国家，是不肯为未来投资的国家，不好意，我们不具备这些特点！除了这两样之外，我们还有更好的优势，就是我们根日本的不同，日本也很勤劳、也很重视教育，日本从1993年就不行了，老龄化，日本从九十年代中期以后，日本的城市也老了。中国跟日本最大的不同就是中国有太广阔的疆域，有太多的县城要去建设了，日本没有，中国有。第三点，这是我今天最想跟大家分享的一点，我们这个国家真的不害怕危机，今天社会上对危机的反应真的有点，我们讲情绪化了，在过去的三十年，我们经历了人类历史上最伟大的经济奇迹啊，我们这个国家说实话很多地方粗糙、狂野，但是它有生命力！它为什么有生命力？因为中国人有一项全世界所有国家都不具备的最伟大的性格，就是中国人从来不是为了一个人活着，从来不是为了这辈子活着，中国人是全世界唯一一个既为过去的人活着，又为将来的人活着的民族。真的，说实话真的很累的，我两个孩子，天天想着的是，这两公子将来啃我得把我啃成什么样？吓得不得了，但是我总是这么想，等到他们的孩子啃他们的时候，报应就来了嘛。有人觉得这不好是吗？除了中国父母有谁会为子女积累这么多的财富，你找不到任何一个民族，像我们这样感觉到自己对自己的前人有责任，感觉到自己对自己的后人有责任，活得是很累、很辛苦，但是恰恰是这样这个民族才能够真正地得以延续！我们说点实在话题，我在美国跟我一个意大利朋友有过非常尖锐的一次争吵，他说你们中国人有病，他说你从来不度假，你不买高档皮鞋，你挣得比我多多了，你整天守财奴！我说你错了，你没有看我孩子进辅导班花的钱，我两年没买新衣服，但是我为我的孩子上学方便，我在小学附近租了一套房，谁说我们小气的，我们愿意把钱花在孩子身上而已。所以我告诉意大利人，中国人在美国第一代是猪仔，第二代我们就能够开餐馆，第三代我们出工程师，第四代我们有可能出议员。你们意大利人第一代做披萨、第二代做披萨、第三代做披萨，也有进步的第四代时互联网做披萨。很多的民族是活在当下的，这就是法国稍微削减一点福利，就有人要上街纵火的原因，我不认为这是民主的胜利，我认为这是最典型的民主的溃败！这个国家的福利不能继续了，每个人还宁愿让这个国家财政崩溃也要满足自己的懒惰。<br>&emsp;&emsp;走的国家越多，你就越会发现，中国人是非常伟大的民族，我们是唯一一个，或者说是最有决心的一个，为了未来牺牲自己的民族。真正的荣誉是什么？是泰坦尼克号上把座位让给孩子的荣耀！我们这一代人仍然是这一代牺牲精神的中国人！我们过的很累、我们过的很沉重，但是我告诉大家，这一切都是值得的，改革开放四十年，我们站在现在回首过去，梦幻一般，这里面是多少人的牺牲，这里面有我们父母多少的积累，在今天这样一个时刻，我们可能要为我们的子女、为这个国家未来的转型，再去熬一熬、熬五年，甚至也许两到三年，有什么可抱怨的？人类、人类在最近二十年过上了一种极其肤浅的、富裕的、快乐的、消费生活，这种生活最大的坏处是让人丧失了历史感，让人成为了一种及时行乐的碎片，只有那些有着不间断的漫长历史的民族，只有那些牢记了自己从哪里来往哪里去的民族，才能克服这种虚无感，才能让自己不至于在人类的进化史上成为毫无意义的碎片，这个民族就是我们！</p>
+        <h1 id="深入分析JS的继承模式"><a href="#深入分析JS的继承模式" class="headerlink" title="深入分析JS的继承模式"></a>深入分析JS的继承模式</h1><p>[JS原型链与继承别再被问倒了]<a href="https://juejin.im/post/58f94c9bb123db411953691b" target="_blank" rel="noopener">https://juejin.im/post/58f94c9bb123db411953691b</a> (主要)</p>
+<p>[从prototype与<strong>proto</strong>窥探JS继承之源]<a href="https://juejin.im/post/58f9d0290ce46300611ada65(主要)" target="_blank" rel="noopener">https://juejin.im/post/58f9d0290ce46300611ada65(主要)</a><br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JavaScript是一门完全面向对象的语言，如果想要更好地使用JavaScript的面向对象系统，原型和原型链就是个绕不开的话题。 </span><br><span class="line">原型及其原型链通过学习借鉴，自己加以汇总总结于此。</span><br><span class="line">原型链本身就是一种继承，讨论一下本身的</span><br></pre></td></tr></table></figure></p>
+<h3 id="原型链的问题"><a href="#原型链的问题" class="headerlink" title="原型链的问题"></a>原型链的问题</h3><p>  原型链继承的时候，存在两个问题</p>
+<ul>
+<li>1、当原型链中存在引用类型的值的时候，由于该值被所有的实例继承，因此该值会被多有的实例共享，即‘一个实例改变了原型链中的引用类型值，则别的实例也就跟着变了’</li>
+<li>2、在创建实例（子类型）的时候，不能像构造函数（父类型）传递参数<br>问题2显而易见，下边举例子说明问题1<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Human</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">'人类'</span></span><br><span class="line">  <span class="keyword">this</span>.family = &#123; </span><br><span class="line">    father:<span class="string">'father'</span>,</span><br><span class="line">    mother:<span class="string">'mother'</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Human.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'this is name prop'</span>, <span class="keyword">this</span>.name)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'this is family prop'</span>, <span class="keyword">this</span>.family.father)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Family</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Family.prototype = <span class="keyword">new</span> Human()</span><br><span class="line"><span class="keyword">var</span> male = <span class="keyword">new</span> Family()</span><br><span class="line"><span class="built_in">console</span>.log(male.getName()) <span class="comment">//  this is name prop 人类, this is family prop father</span></span><br><span class="line">male.name = <span class="string">'男性'</span></span><br><span class="line">male.family.father = <span class="string">'sonFather'</span></span><br><span class="line"><span class="keyword">var</span> female = <span class="keyword">new</span> Family()</span><br><span class="line"><span class="built_in">console</span>.log(male.getName()) <span class="comment">// this is name prop 男性, this is family prop sonFather</span></span><br><span class="line"><span class="built_in">console</span>.log(female.getName()) <span class="comment">// this is name prop 人类, this is family prop sonFather</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>由上, 可以发现，我们利用Human构造函数创建了实例male，修改male实例中的name属性后，不会影响在male之后创建的实例female，但是修改实例的引用类型属性family的时候， 新创建的实例female的family属性值也会跟着变化。这个大多数场景并不是我们想要的结果，因为不可控。<br>因此，实际中很少单独使用原型链进行继承。</p>
 
       
     </div>
@@ -389,7 +429,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/text/" rel="tag"># text</a>
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+            <a href="/tags/konwledge/" rel="tag"># konwledge</a>
           
         </div>
       
@@ -402,8 +444,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/20/加密算法总结/" rel="next" title="加密算法总结">
-                <i class="fa fa-chevron-left"></i> 加密算法总结
+              <a href="/2019/03/01/life-is-hard/" rel="next" title="生活不易">
+                <i class="fa fa-chevron-left"></i> 生活不易
               </a>
             
           </div>
@@ -411,10 +453,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/01/life-is-hard/" rel="prev" title="生活不易">
-                生活不易 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -466,8 +504,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/uploads/avator.jpg" alt="kfpanda">
           <p class="site-author-name" itemprop="name">kfpanda</p>
@@ -595,6 +642,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#深入分析JS的继承模式"><span class="nav-number">1.</span> <span class="nav-text">深入分析JS的继承模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原型链的问题"><span class="nav-number">1.0.1.</span> <span class="nav-text">原型链的问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
