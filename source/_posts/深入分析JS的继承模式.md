@@ -50,4 +50,40 @@ categories:
   ```
 由上, 可以发现，我们利用Human构造函数创建了实例male，修改male实例中的name属性后，不会影响在male之后创建的实例female，但是修改实例的引用类型属性family的时候， 新创建的实例female的family属性值也会跟着变化。这个大多数场景并不是我们想要的结果，因为不可控。
 因此，实际中很少单独使用原型链进行继承。
-  
+### 借用构造函数
+为了解决上述的两个问题，我们可以使用一种叫做借用构造函数的技术，又叫经典继承
+```
+  基本思想： 在子类型构造函数内部调用父类型构造函数
+```
+举个例子
+```javascript
+function Human() {
+    this.name = '人类'
+    this.family = { 
+      father:'father',
+      mother:'mother',
+    }
+    this.getNameInHuman = function() {
+      console.log('this is name prop', this.name)
+      console.log('this is family prop', this.family.father)
+    }
+  }
+Human.prototype.getName = function() {
+  console.log('this is name prop', this.name)
+  console.log('this is family prop', this.family.father)
+}
+function Family() {
+  Human.call(this)
+}
+var male = new Family()
+console.log(male.getName) //  this is name prop 人类, this is family prop father
+console.log(male.getNameInHuman()) //  this is name prop 人类, this is family prop father
+male.name = '男性'
+male.family.father = 'sonFather'
+var female = new Family()
+console.log(male.getNameInHuman()) // this is name prop 男性, this is family prop sonFather
+console.log(female.getNameInHuman()) // this is name prop 人类, this is family prop sonFather
+```
+```shell
+ git diff --cached --name-only --diff-filter=ACM -- '*.jsx'  '*.js' '*.ts'  
+```
