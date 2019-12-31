@@ -57,7 +57,8 @@ categories:
 ```
 举个例子
 ```javascript
-function Human() {
+function Human(age) {
+    this.age = age || '18'
     this.name = '人类'
     this.family = { 
       father:'father',
@@ -72,18 +73,24 @@ Human.prototype.getName = function() {
   console.log('this is name prop', this.name)
   console.log('this is family prop', this.family.father)
 }
-function Family() {
-  Human.call(this)
+function Family(age) {
+  Human.call(this, age)
 }
 var male = new Family()
 console.log(male.getName) //  this is name prop 人类, this is family prop father
 console.log(male.getNameInHuman()) //  this is name prop 人类, this is family prop father
+console.log(male.age) //  this is name prop 人类, this is family prop father
 male.name = '男性'
 male.family.father = 'sonFather'
-var female = new Family()
+var female = new Family(28)
+console.log('this is male.age', male.age) // 18
 console.log(male.getNameInHuman()) // this is name prop 男性, this is family prop sonFather
-console.log(female.getNameInHuman()) // this is name prop 人类, this is family prop sonFather
+console.log('this is female.age', female.age) // 28
 ```
-```shell
- git diff --cached --name-only --diff-filter=ACM -- '*.jsx'  '*.js' '*.ts'  
+由上获得，解决了上述简单的单独使用原型链继承的两大问题：
++ 保证了原型链中引用类型值的独立，不在被多有实例共享，即不会一个实例改变，影响以后新创建的实例的属性
++ 子类型创建时候也能够向父类型传值 
+```javascript
+  var female = new Family(28) //  将age参数，通过创建子类型的实例的时候，传递过去············································································
 ```
+随之出现的问题是： 
