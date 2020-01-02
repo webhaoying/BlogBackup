@@ -77,14 +77,16 @@ function Family(age) {
   Human.call(this, age)
 }
 var male = new Family()
-console.log(male.getName) //  this is name prop 人类, this is family prop father
+console.log(male.getName) // undefined
 console.log(male.getNameInHuman()) //  this is name prop 人类, this is family prop father
-console.log(male.age) //  this is name prop 人类, this is family prop father
+console.log(male.age) //  18
 male.name = '男性'
 male.family.father = 'sonFather'
 var female = new Family(28)
 console.log('this is male.age', male.age) // 18
 console.log(male.getNameInHuman()) // this is name prop 男性, this is family prop sonFather
+console.log(female.getNameInHuman()) // this is name prop 人类, this is family prop father
+console.log(female.getName) // undefined
 console.log('this is female.age', female.age) // 28
 ```
 由上获得，解决了上述简单的单独使用原型链继承的两大问题：
@@ -95,3 +97,42 @@ console.log('this is female.age', female.age) // 28
 ```
 随之出现的问题是：如果仅仅使用构造函数，那么无法避免构造函数模式存在的问题，
 + 所有的方法都在构造函数中定义，每个实例的创建，都会拷贝一份构造函数中的方法，作为实例自己的方法；这样的话，内存占用会变大，尤其是方法过多的时候，因此这里就没有了函数复用的意义，但是我们利用继承本身就是为了能够高效复用。
++ 构造函数中的方法，最终实际上都成了实例的方法，当需求改变的时候，要改动其中的一个方法的时候，之前所有的实例否不能即使作出更新。只有在更改了构造函数方法，之后新创建的实例才能访问新的方法。
++ 即便父级构造函数的原型对象中，已经定义了方法，但是在子级的构造函数的实例中，无法使用，因为只是借用了构造函数创造的实例，也就是借用构造函数实现继承的话，都需要在构造函数中声明想要复用的方法和属性，是没有办法沿着原型链进行继承。
+
+因此单独的使用原型链继承、借用构造函数继承都有无法接受的缺点。最好的办法是两者结合在一起
+### 组合继承
+组合继承，指的是将原项链继承和借用构造函数继承的技术结合到一起，从而发挥两者之长的一种继承模式
+```javascript
+ 基本的思路： 使用原型链实现对原型属性和方法的继承，通过借用构造函数来实现对视力属性的继承
+```
+这样节能在原型上实现函数的复用，又能保证每个实例都有自己的属性。举例：
+```javascript
+function Father(name) {
+  //定义Father这个大类中共有的属性 name  color
+  this.name = name 
+  this.colors = ['red', 'blue', 'green']
+}
+Father.prototype.sayName = function() {
+  console.log(this.name) //利用原型链继承，定义复用的方法
+}
+function Son(name, age) {
+  this.age = age //  定义Son子类 私有的属性
+  Father.call(this, name) //  借用父级构造函数，实现继承
+}
+Son.prototype = new Father()
+Son.prototype.sayAge = function() {
+  console.log(this, 11111)
+  console.log(this.age)
+}
+var instance1 =  new Son('louis', 5)
+instance1.colors.push('black')
+console.log(instance1.colors)// ["red", "blue", "green", "black"]
+instance1.sayName() //  louis
+instance1.sayAge() // 5
+
+var instance2 = new Son('zhai', 10)
+console.log(instance2.colors) //  ["red", "blue", "green"]
+instance2.sayName() // zhai
+instance2.sayAge() // 10
+```
