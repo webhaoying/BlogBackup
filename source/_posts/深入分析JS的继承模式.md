@@ -136,3 +136,4 @@ console.log(instance2.colors) //  ["red", "blue", "green"]
 instance2.sayName() // zhai
 instance2.sayAge() // 10
 ```
+由例子可以看到，根据子类创建的实例对象，能够继承Son的构造函数的原型对象的属性或者方法，因为是原型链继承（b.prototype = new a），同时也能追溯到父类的Father的原型对象中的属性或者方法;同时，由于借用了构造函数进行继承，实例instance1修改colors属性时，并不会影响之后创建的instance2的colors属性，因为每个实例都自己创建的属于实例本身的属性。
