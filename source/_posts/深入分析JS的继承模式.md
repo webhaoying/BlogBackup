@@ -1,5 +1,5 @@
 ---
-itle: 深入分析JS的继承模式
+title: 深入分析JS的继承模式
 date: 2019-12-27 11:36:31
 tags: 
         - konwledge
